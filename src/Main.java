@@ -103,7 +103,8 @@ import Animals.Fish;
 import Animals.Bear; 
 import Animals.Whale;
 
-
+import java.util.HashSet;
+import java.util.Set;
 
 public class Main {
     public static void main (String[] args ){
@@ -116,7 +117,34 @@ public class Main {
         PrintAnimal(fish);
         PrintAnimal(bear);
         PrintAnimal(whale);
-
+        
+        // Демонстрация работы equals и hashCode
+        System.out.println("\n=== ДЕМОНСТРАЦИЯ equals и hashCode ===");
+        
+        // Создаем одинаковых животных
+        Animal kat1 = new Kat();
+        Animal kat2 = new Kat();
+        Animal fish1 = new Fish();
+        
+        System.out.println("Сравнение одинаковых кошек:");
+        System.out.println("kat1.equals(kat2): " + kat1.equals(kat2));
+        System.out.println("kat1.hashCode() == kat2.hashCode(): " + (kat1.hashCode() == kat2.hashCode()));
+        
+        System.out.println("\nСравнение разных животных:");
+        System.out.println("kat1.equals(fish1): " + kat1.equals(fish1));
+        System.out.println("kat1.hashCode() == fish1.hashCode(): " + (kat1.hashCode() == fish1.hashCode()));
+        
+        // Демонстрация работы с HashSet
+        System.out.println("\n=== РАБОТА С HashSet ===");
+        Set<Animal> animalSet = new HashSet<>();
+        animalSet.add(kat1);
+        animalSet.add(kat2); // Дубликат - не добавится
+        animalSet.add(fish1);
+        animalSet.add(bear);
+        animalSet.add(whale);
+        
+        System.out.println("Размер HashSet: " + animalSet.size());
+        System.out.println("Содержит ли Set кошку: " + animalSet.contains(new Kat()));
     }
 
     public static void PrintAnimal(Animal animal){
